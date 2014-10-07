@@ -1,0 +1,13 @@
+
+$(OBJ)/libapp.a:$(OBJ)/sesc_thread.o $(OBJ)/sesc_events.o $(OBJ)/sesc_locks.o $(OBJ)/sesc_fortran.o $(OBJ)/sesc_chud.o
+$(OBJ)/sesc_events.o: /home/student/SuperTrans/src/src/libapp/sesc_events.c /home/student/SuperTrans/src/src/libapp/sescapi.h /home/student/SuperTrans/src/src/libapp/simicsapi.h
+$(OBJ)/sesc_fortran.o: /home/student/SuperTrans/src/src/libapp/sesc_fortran.c /home/student/SuperTrans/src/src/libapp/sescapi.h /home/student/SuperTrans/src/src/libapp/simicsapi.h
+$(OBJ)/sesc_locks.o: /home/student/SuperTrans/src/src/libapp/sesc_locks.c /home/student/SuperTrans/src/src/libapp/sescapi.h /home/student/SuperTrans/src/src/libapp/simicsapi.h
+$(OBJ)/sesc_thread.o: /home/student/SuperTrans/src/src/libapp/sesc_thread.c /home/student/SuperTrans/src/src/libapp/sescapi.h /home/student/SuperTrans/src/src/libapp/simicsapi.h
+$(OBJ)/sesc_tls.o: /home/student/SuperTrans/src/src/libapp/sesc_tls.c /home/student/SuperTrans/src/src/libapp/sescapi.h /home/student/SuperTrans/src/src/libapp/simicsapi.h
+$(OBJ)/sesc_ts.o: /home/student/SuperTrans/src/src/libapp/sesc_ts.c /home/student/SuperTrans/src/src/libapp/sescapi.h /home/student/SuperTrans/src/src/libapp/simicsapi.h
+
+
+
+
+
