@@ -6,16 +6,16 @@ printDetailedTrace              = 0   # Print Full Detailed Transactional Trace
 printTransactionalReport        = 0   # Print Transactional Report (1 line per TX)
 printTransactionalReportSummary = 1   # Print Transactional Summary Report
 printSummaryReport              = 1   # Print Global TM Summary Report
-traceToFile                     = 0   # Output debug info to a file instead of stdout
-traceFile                       = "Eager_core8"  # Optional tag to add to the output file
+traceToFile                     = 1   # Output debug info to a file instead of stdout
+traceFile                       = "Lazy_core8"  # Optional tag to add to the output file
 
 ### Coherence Protocol Options
 # For Eager/Eager set the following to 1/1
 # For Lazy/Lazy set the following to 0/0
 # For Eager/Lazy set the following to 1/0
 
-conflictDetect                  = 1   # Conflict Detection: 0 for lazy, 1 for eager
-versioning                      = 1   # Version Management: 0 for lazy, 1 for eager
+conflictDetect                  = 0   # Conflict Detection: 0 for lazy, 1 for eager
+versioning                      = 0   # Version Management: 0 for lazy, 1 for eager
 
 ### Physical Cache Structure Options
 cacheLineSize                   = 32  # Cache Line Size (in bytes) aka conflict granularity
