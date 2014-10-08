@@ -1,0 +1,27 @@
+<Trans> tmTrace: IRCD :99999999999:0:6666:149824816:285270492
+<Trans> tmReport:ENDINST:0:150395577
+<Trans> tmReport:ENDINST:1:521946
+<Trans> tmReport:ENDINST:2:575227
+<Trans> tmReport:ENDINST:3:558070
+<Trans> tmReport:INSTCOUNT:152060520:
+
+
+<Trans> tmReportSummary:CPU:TX_COUNT:COMMITS:ABORTS:CM_INST:CM_CYCLES:CM_NKCYCLES:AVG_CM_INST:AVG_CM_CYC:AVG_CM_READS:AVG_CM_READSET:AVG_CM_WRITES:AVG_CM_WRITESET:AVG_CM_NACKCYC:AB_INST:AB_CYCLES:AB_NKCYCLES:AVG_AB_INST:AVG_AB_CYC:AVG_AB_READS:AVG_AB_READSET:AVG_AB_WRITES:AVG_AB_WRITESET:AVG_AB_NACKCYC
+<Trans> tmReportSummary:0:102:102:0:473249:1498459:0:4639.6961:14690.7745:1679.2745:76.8235:827.7059:18.4706:0.0000:0:0:0:-nan:-nan:-nan:-nan:-nan:-nan:-nan
+<Trans> tmReportSummary:1:102:102:0:431867:1400595:16950:4233.9902:13731.3235:1530.7549:71.2941:753.0098:15.9118:166.1765:0:0:0:-nan:-nan:-nan:-nan:-nan:-nan:-nan
+<Trans> tmReportSummary:2:102:102:0:481094:1561198:0:4716.6078:15305.8627:1706.9314:76.1275:839.8529:16.3922:0.0000:0:0:0:-nan:-nan:-nan:-nan:-nan:-nan:-nan
+<Trans> tmReportSummary:3:102:102:0:465532:1468565:0:4564.0392:14397.6961:1651.6961:74.4902:815.4706:16.5000:0.0000:0:0:0:-nan:-nan:-nan:-nan:-nan:-nan:-nan
+
+
+#tableG,ALL,ALL,StatsInc,Commit,Abort,NTot,NAvg,NCyc,NCycAvg,ComCycTot,ComCycAvg,ComCycMin,ComCycMax,InstTotCm,InstAvgCm,InstMinCm,InstMaxCm,AbortCycTot,AbortCycAvg,AbortCycMin,AbortCycMax,InstTotAb,InstAvgAb,InstMinAb,InstMaxAb,R-Set,Loads,W-Set,Stores,BeginInstCount,BeginCycleCount,ANTot,ANAvg,ANCyc,ANCycAvg
+tableG,ALL,ALL,408,408,0,1,0.00,16950,16950.00,5928817,14531.41,3929,45492,1851742,4538.58,574,6863,0,-nan,999999999,0,0,-nan,999999999,0,74.68,1642.16,16.82,809.01,0,0,0,-nan,0,-nan
+
+Global Totals:
+          Trans ->   StatsInc:     408    Commit:       408    Abort:        0
+          Nacks ->   Total:          1    Avg:         0.00    Cyc:      16950    Avg:    16950.00
+          CyclCM->   Total:    5928817    Avg:     14531.41    Min:       3929    Max:       45492
+          InstCM->   Total:    1851742    Avg:      4538.58    Min:        574    Max:        6863
+          CyclAB->   Total:          0    Avg:         -nan    Min:   999999999    Max:           0
+          InstAB->   Total:          0    Avg:         -nan    Min:   999999999    Max:           0
+          Memory->   R-Set:      74.68    Loads:    1642.16    W-Set:    16.82    Stores:   809.01
+
