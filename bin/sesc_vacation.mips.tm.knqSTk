@@ -1,0 +1,861 @@
+#BEGIN Configuration used. Extracted from "sesc.conf":
+procsPerNode=2
+cpucore[0:1]='issueX'
+NoMigration=true
+pageSize  =4096
+technology='techParam'
+[issueX]
+instrSource="IMemory IL1"
+robSize   =176
+stForwardDelay=2
+renameDelay=3
+dataSource="DMemory DL1"
+issueWidth=4
+maxStores =56
+maxBranches=64
+retireWidth=5
+inorder   =false
+OSType    ='dummy'
+dtlb      ='FXDTLB'
+cluster[1:1]='FPClusterIssueX'
+cluster   ='FXClusterIssueX'
+interClusterLat=2
+maxLoads  =56
+intRegs   =96
+regFileDelay=3
+fetchWidth=4
+bpred     ='BPredIssueX'
+maxIRequests=4
+decodeDelay=6
+bb4Cycle  =1
+enableICache=true
+instQueueSize=8
+itlb      ='FXITLB'
+fpRegs    =80
+[FXDTLB]
+size      =512
+replPolicy='LRU'
+bsize     =8
+assoc     =4
+deviceType='cache'
+[DMemory]
+MSHR      ='DMSHR'
+missDelay =2
+bsize     =32
+hitDelay  =2
+numPorts  =2
+deviceType='smpcache'
+assoc     =4
+lowerLevel="L1L2DBus L1L2D shared"
+size      =32768
+protocol  ='MESI'
+replPolicy='LRU'
+portOccp  =2
+[Memory]
+size      =64
+numPorts  =1
+portOccp  =1
+bsize     =64
+assoc     =1
+missDelay =469
+replPolicy='LRU'
+MSHR      ='NoMSHR'
+deviceType='niceCache'
+hitDelay  =469
+lowerLevel='voidDevice'
+[IMemory]
+assoc     =2
+missDelay =1
+replPolicy='LRU'
+MSHR      ='iMSHR'
+bsize     =32
+size      =32768
+writePolicy='WT'
+lowerLevel="L1L2Bus L1L2 shared"
+hitDelay  =1
+deviceType='icache'
+numPorts  =2
+portOccp  =1
+[L1L2Bus]
+deviceType='bus'
+numPorts  =1
+delay     =1
+portOccp  =1
+lowerLevel="L2Cache L2"
+[L1L2DBus]
+portOccp  =1
+lowerLevel="L2Cache L2"
+numPorts  =1
+delay     =1
+deviceType='systembus'
+[L2Cache]
+numPorts  =2
+replPolicy='LRU'
+missDelay =11
+size      =1048576
+portOccp  =2
+hitDelay  =9
+assoc     =8
+lowerLevel="SystemBus SysBus "
+inclusive =false
+MSHR      ='L2MSHR'
+deviceType='cache'
+bsize     =32
+writePolicy='WB'
+[FPClusterIssueX]
+wakeUpPortOccp=1
+wakeUpNumPorts=4
+fpMultUnit='FPIssueX'
+schedDelay=1
+schedPortOccp=1
+fpDivUnit ='FPIssueX'
+winSize   =32
+schedNumPorts=4
+wakeupDelay=3
+fpALULat  =1
+fpALUUnit ='FPIssueX'
+fpDivLat  =10
+fpMultLat =2
+recycleAt ='Execute'
+[BPredIssueX]
+type      ='hybrid'
+l2size    =16384
+Metasize  =16384
+btbBsize  =1
+historySize=11
+MetaBits  =2
+btbReplPolicy='LRU'
+l2Bits    =1
+btbSize   =2048
+localSize =16384
+rasSize   =32
+BTACDelay =0
+localBits =2
+btbAssoc  =2
+[FXClusterIssueX]
+schedDelay=1
+iALUUnit  ='ALUIssueX'
+iStoreUnit='LDSTIssueX'
+wakeupDelay=3
+recycleAt ='Execute'
+iBJUnit   ='ALUIssueX'
+iDivUnit  ='ALUIssueX'
+iMultUnit ='ALUIssueX'
+iMultLat  =4
+iDivLat   =12
+winSize   =80
+wakeUpNumPorts=4
+iLoadLat  =1
+iLoadUnit ='LDSTIssueX'
+iStoreLat =1
+schedNumPorts=4
+wakeUpPortOccp=1
+iBJLat    =1
+schedPortOccp=1
+iALULat   =1
+[TransactionalMemory]
+transReportFlush=10
+traceToFile=1
+recordTransMemRefs=0
+printTransactionalReportSummary=1
+calculateFullReadWriteSet=0
+traceFile ='Eager_core2'
+conflictDetect=1
+printRealBCTimes=0
+enableBeginTMStats=0
+printTransactionalReport=0
+cacheLineSize=32
+versioning=1
+limitAborts=0
+printSummaryReport=1
+printAllNacks=0
+printDetailedTrace=0
+[MemoryBus]
+delay     =15
+lowerLevel="Memory Memory"
+deviceType='bus'
+numPorts  =1
+portOccp  =8
+[NoMSHR]
+bsize     =64
+type      ='none'
+size      =128
+[L2MSHR]
+size      =64
+bsize     =32
+type      ='single'
+[ALUIssueX]
+Occ       =1
+Num       =2
+[FXITLB]
+size      =512
+deviceType='cache'
+replPolicy='LRU'
+bsize     =8
+assoc     =4
+[techParam]
+frequency =5.000000e+09
+[DMSHR]
+bsize     =32
+type      ='single'
+size      =64
+[FPIssueX]
+Num       =3
+Occ       =1
+[SystemBus]
+lowerLevel="MemoryBus MemoryBus"
+portOccp  =1
+delay     =1
+numPorts  =1
+deviceType='bus'
+[LDSTIssueX]
+Num       =2
+Occ       =1
+[voidDevice]
+deviceType='void'
+[iMSHR]
+type      ='single'
+bsize     =32
+size      =32
+#END Configuration used. Extracted from "sesc.conf":
+OSSim:beginTime=Wed Oct  8 15:40:56 2014
+
+OSSim:bench=./sesc.trans ../benchmarks/stamp/vacation.mips.tm -c2 -n2 -q90 -u98 -r16384 -t409 
+OSSim:benchName=vacation.mips.tm
+ProcessId(1):totalTime=3129912:waitTime=0:spawnTime=285095830:exitTime=288225742:Switchs=1
+ProcessId(1):cpu=1:migrable=false:pinned=true:pid=1:ppid=0:parentId=0
+ProcessId(0):totalTime=288413145:waitTime=0:spawnTime=0:exitTime=288413145:Switchs=1
+ProcessId(0):cpu=0:migrable=false:pinned=true:pid=0:ppid=-1:parentId=-1
+ProcessId:nSwitchs=2:nSpawns=1:nGradInsts=151929259:nWPathInsts=0
+Proc(0):clockTicks=288413164
+Proc(1):clockTicks=3130429
+OSSim:reportName=Final
+OSSim:msecs=  401.42:nCPUs=2:nCycles=288413166
+OSSim:pseudoreset=0
+BEGIN GStats::report Final
+P(0)_DL1:readHit=17188868
+P(0)_DL1:writeHit=24309601
+P(0)_DL1:readMiss=480806
+P(0)_DL1:writeMiss=153051
+P(0)_DL1:readHalfMiss=1157455
+P(0)_DL1:writeHalfMiss=608554
+P(0)_DL1:writeBack=414361
+P(0)_DL1:linePush=0
+P(0)_DL1:lineFill=633857
+P(0)_DL1:readRetry=0
+P(0)_DL1:writeRetry=0
+P(0)_DL1:invalDirty=0
+P(0)_DL1:allocDirty=414261
+P(0)_L2:readHalfMiss=75
+P(0)_L2:writeHalfMiss=0
+P(0)_L2:writeMiss=0
+P(0)_L2:readMiss=159353
+P(0)_L2:readHit=479917
+P(0)_L2:writeHit=0
+P(0)_L2:writeBack=125878
+P(0)_L2:lineFill=159353
+P(0)_L2:linePush=415026
+P(0)_L2:nForwarded=0
+P(0)_L2:nWBFull=0
+P(0)_L2_avgPendingWrites:v=0:n=0
+P(0)_L2_avgMissLat:v=496.005:n=159428
+P(0)_L2:rejected=0
+P(0)_L2:rejectedHits=0
+P(0)_L2_MSHR0_MSHR:nUse=159428
+P(0)_L2_MSHR0_MSHR:nUseReads=159428
+P(0)_L2_MSHR0_MSHR:nUseWrites=0
+P(0)_L2_MSHR0_MSHR:nOverflows=0
+P(0)_L2_MSHR0_MSHR_maxUsedEntries:max=6:n=159353
+P(0)_L2_MSHR0_MSHR:nCanAccept=0
+P(0)_L2_MSHR0_MSHR:nCanNotAccept=0
+P(0)_L2_MSHR0_MSHR:nCanNotAcceptConv=0
+P(0)_L2_MSHR0_MSHR:blockingCycles_AutoAvg=0.000000
+P(0)_L2_MSHR0_MSHR_avgOverflowConsumptions:v=0:n=0
+P(0)_L2_MSHR0_MSHR_maxOutsReqs:max=8:n=159428
+P(0)_L2_MSHR0_MSHR_avgReqsPerLine:v=1.00047:n=159353
+P(0)_L2_MSHR0_MSHR:nIssuesNewEntry=159353
+P(0)_L2_MSHR0_MSHR:nCanNotAcceptSubEntryFull=0
+P(0)_L2_MSHR0_MSHR:nCanNotAcceptTooManyWrites=0
+P(0)_L2_MSHR0_MSHR_avgQueueSize:v=0.00799734:n=159428
+P(0)_L2_MSHR0_MSHR_avgWritesPerLine:v=0:n=159353
+P(0)_L2_MSHR0_MSHR_avgWritesPerLineComb:v=0:n=159353
+P(0)_L2_MSHR0_MSHR:nOnlyWrites=0
+P(0)_L2_MSHR0_MSHR:nRetiredEntries=159353
+P(0)_L2_MSHR0_MSHR:nRetiredEntriesWritten=0
+P(0)_L2_B0:nAccesses=1054371
+DataP(0)_SysBus_occ:v=0:n=285332
+CmdP(0)_SysBus_occ:v=1.40188e-05:n=285332
+DataP(0)_MemoryBus_occ:v=0.0255772:n=285332
+CmdP(0)_MemoryBus_occ:v=0:n=285332
+P(0)_Memory:readHalfMiss=0
+P(0)_Memory:writeHalfMiss=0
+P(0)_Memory:writeMiss=0
+P(0)_Memory:readMiss=0
+P(0)_Memory:readHit=159353
+P(0)_Memory:writeHit=0
+P(0)_Memory:writeBack=0
+P(0)_Memory:lineFill=0
+P(0)_Memory:linePush=125979
+P(0)_Memory:nForwarded=0
+P(0)_Memory:nWBFull=0
+P(0)_Memory_avgPendingWrites:v=0:n=0
+P(0)_Memory_avgMissLat:v=0:n=0
+P(0)_Memory:rejected=0
+P(0)_Memory:rejectedHits=0
+P(0)_Memory_MSHR0_MSHR:nUse=0
+P(0)_Memory_MSHR0_MSHR:nUseReads=0
+P(0)_Memory_MSHR0_MSHR:nUseWrites=0
+P(0)_Memory_MSHR0_MSHR:nOverflows=0
+P(0)_Memory_MSHR0_MSHR_maxUsedEntries:max=0:n=0
+P(0)_Memory_MSHR0_MSHR:nCanAccept=0
+P(0)_Memory_MSHR0_MSHR:nCanNotAccept=0
+P(0)_Memory_MSHR0_MSHR:nCanNotAcceptConv=0
+P(0)_Memory_MSHR0_MSHR:blockingCycles_AutoAvg=0.000000
+P(0)_Memory_B0:nAccesses=285332
+P(0)_Memory_occ:v=0:n=0
+P(0)_Memory_B0_occ:v=0:n=0
+P(0)_Memory_MSHR_B0_occ:v=0:n=0
+P(0)_MemoryBus_AvgTime_MemRead:v=7.65871:n=17894
+P(0)_MemoryBus_AvgTime_MemWrite:v=0:n=0
+P(0)_MemoryBus_AvgTime_MemPush:v=7.5047:n=251958
+P(0)_MemoryBus_AvgTime_MemReadW:v=7.51089:n=300812
+P(0)_SysBus_AvgTime_MemRead:v=0.5:n=17894
+P(0)_SysBus_AvgTime_MemWrite:v=0:n=0
+P(0)_SysBus_AvgTime_MemPush:v=0.500016:n=251958
+P(0)_SysBus_AvgTime_MemReadW:v=0.5:n=300812
+P(0)_L2_occ:v=9.48524e-07:n=1054270
+P(0)_L2_B0_occ:v=2.47173e-06:n=1213724
+P(0)_L2_MSHR_B0_occ:v=0.000980689:n=478235
+L1L2D_bus_occ:v=0.122732:n=3383638
+P(0)_DL1_occ:v=0.0999286:n=43545544
+P(0)_DL1_MSHR:nUse=42132326
+P(0)_DL1_MSHR:nUseReads=42132326
+P(0)_DL1_MSHR:nUseWrites=0
+P(0)_DL1_MSHR:nOverflows=0
+P(0)_DL1_MSHR_maxUsedEntries:max=4:n=40366317
+P(0)_DL1_MSHR:nCanAccept=24462655
+P(0)_DL1_MSHR:nCanNotAccept=279
+P(0)_DL1_MSHR:nCanNotAcceptConv=0
+P(0)_DL1_MSHR:blockingCycles(0)=288412884
+P(0)_DL1_MSHR:blockingCycles(1)=282
+P(0)_DL1_MSHR:blockingCycles_AutoAvg=0.000000
+P(0)_DL1_MSHR_avgOverflowConsumptions:v=0:n=0
+P(0)_DL1_MSHR_maxOutsReqs:max=22:n=42132326
+P(0)_DL1_MSHR_avgReqsPerLine:v=1.04375:n=40366317
+P(0)_DL1_MSHR:nIssuesNewEntry=40366317
+P(0)_DL1_MSHR:nCanNotAcceptSubEntryFull=279
+P(0)_DL1_MSHR:nCanNotAcceptTooManyWrites=0
+P(0)_DL1_MSHR_avgQueueSize:v=0.763301:n=42132326
+P(0)_DL1_MSHR_avgWritesPerLine:v=0:n=40366317
+P(0)_DL1_MSHR_avgWritesPerLineComb:v=0:n=40366317
+P(0)_DL1_MSHR:nOnlyWrites=0
+P(0)_DL1_MSHR:nRetiredEntries=40366317
+P(0)_DL1_MSHR:nRetiredEntriesWritten=0
+mutExclBuffer_MSHR:nUse=639056
+mutExclBuffer_MSHR:nUseReads=639056
+mutExclBuffer_MSHR:nUseWrites=0
+mutExclBuffer_MSHR:nOverflows=0
+mutExclBuffer_MSHR_maxUsedEntries:max=4:n=639055
+mutExclBuffer_MSHR:nCanAccept=0
+mutExclBuffer_MSHR:nCanNotAccept=0
+mutExclBuffer_MSHR:nCanNotAcceptConv=0
+mutExclBuffer_MSHR:blockingCycles_AutoAvg=0.000000
+mutExclBuffer_MSHR_avgOverflowConsumptions:v=0:n=0
+mutExclBuffer_MSHR_maxOutsReqs:max=4:n=639056
+mutExclBuffer_MSHR_avgReqsPerLine:v=1:n=639055
+mutExclBuffer_MSHR:nIssuesNewEntry=639055
+mutExclBuffer_MSHR:nCanNotAcceptSubEntryFull=0
+mutExclBuffer_MSHR:nCanNotAcceptTooManyWrites=0
+mutExclBuffer_MSHR_avgQueueSize:v=1.56481e-06:n=639056
+mutExclBuffer_MSHR_avgWritesPerLine:v=0:n=639055
+mutExclBuffer_MSHR_avgWritesPerLineComb:v=0:n=639055
+mutExclBuffer_MSHR:nOnlyWrites=0
+mutExclBuffer_MSHR:nRetiredEntries=639055
+mutExclBuffer_MSHR:nRetiredEntriesWritten=0
+P(0)_IL1:readHalfMiss=553
+P(0)_IL1:writeHalfMiss=0
+P(0)_IL1:writeMiss=0
+P(0)_IL1:readMiss=1193
+P(0)_IL1:readHit=43337639
+P(0)_IL1:writeHit=0
+P(0)_IL1:writeBack=0
+P(0)_IL1:lineFill=1193
+P(0)_IL1:linePush=0
+P(0)_IL1:nForwarded=0
+P(0)_IL1:nWBFull=0
+P(0)_IL1_avgPendingWrites:v=0:n=0
+P(0)_IL1_avgMissLat:v=432.481:n=1746
+P(0)_IL1:rejected=0
+P(0)_IL1:rejectedHits=0
+P(0)_IL1_MSHR0_MSHR:nUse=1746
+P(0)_IL1_MSHR0_MSHR:nUseReads=1746
+P(0)_IL1_MSHR0_MSHR:nUseWrites=0
+P(0)_IL1_MSHR0_MSHR:nOverflows=0
+P(0)_IL1_MSHR0_MSHR_maxUsedEntries:max=3:n=1193
+P(0)_IL1_MSHR0_MSHR:nCanAccept=0
+P(0)_IL1_MSHR0_MSHR:nCanNotAccept=0
+P(0)_IL1_MSHR0_MSHR:nCanNotAcceptConv=0
+P(0)_IL1_MSHR0_MSHR:blockingCycles_AutoAvg=0.000000
+P(0)_IL1_MSHR0_MSHR_avgOverflowConsumptions:v=0:n=0
+P(0)_IL1_MSHR0_MSHR_maxOutsReqs:max=4:n=1746
+P(0)_IL1_MSHR0_MSHR_avgReqsPerLine:v=1.46354:n=1193
+P(0)_IL1_MSHR0_MSHR:nIssuesNewEntry=1193
+P(0)_IL1_MSHR0_MSHR:nCanNotAcceptSubEntryFull=0
+P(0)_IL1_MSHR0_MSHR:nCanNotAcceptTooManyWrites=0
+P(0)_IL1_MSHR0_MSHR_avgQueueSize:v=5.40092:n=1746
+P(0)_IL1_MSHR0_MSHR_avgWritesPerLine:v=0:n=1193
+P(0)_IL1_MSHR0_MSHR_avgWritesPerLineComb:v=0:n=1193
+P(0)_IL1_MSHR0_MSHR:nOnlyWrites=0
+P(0)_IL1_MSHR0_MSHR:nRetiredEntries=1193
+P(0)_IL1_MSHR0_MSHR:nRetiredEntriesWritten=0
+P(0)_IL1_B0:nAccesses=43339385
+DataL1L2_occ:v=0.00124378:n=1608
+CmdL1L2_occ:v=0.00310945:n=1608
+L1L2_AvgTime_MemRead:v=0.502177:n=3216
+L1L2_AvgTime_MemWrite:v=0:n=0
+L1L2_AvgTime_MemPush:v=0:n=0
+L1L2_AvgTime_MemReadW:v=0:n=0
+P(0)_IL1_occ:v=0:n=43339385
+P(0)_IL1_B0_occ:v=0:n=43340578
+P(0)_IL1_MSHR_B0_occ:v=0:n=2939
+LDSTQ(0)_ldldViolations=2923158
+LDSTQ(0)_stldViolations=1592631
+LDSTQ(0)_ststViolations=1081904
+LDSTQ(0)_stldForwarding=10358048
+Proc(0)_FXClusterIssueX:nReplay=6380923
+Proc(0)_FXClusterIssueX_wakeUp_occ:v=0.0488579:n=301692221
+Proc(0)_FXClusterIssueX_sched_occ:v=0.00479195:n=150846107
+Proc(0)_FXClusterIssueX_winNotUsed:v=46.0406:n=150846107
+ALUIssueX(0)_occ:v=0.0364177:n=75901864
+LDSTIssueX(0)_occ:v=0.10448:n=99406898
+FULoad(0)_ldqNotUsed:v=31.9361:n=50481588
+FULoad(0):nForwarded=32811914
+FUStore(0)_stqNotUsed:v=42.8846:n=24462655
+FUStore(0):nDeadStore=0
+FUStore(0):nFences=0
+FUStore(0):fenceStallCycles=0
+Proc(0)_FPClusterIssueX:nReplay=0
+Proc(0)_FPClusterIssueX_wakeUp_occ:v=0:n=97
+Proc(0)_FPClusterIssueX_sched_occ:v=0:n=52
+Proc(0)_FPClusterIssueX_winNotUsed:v=30.3846:n=52
+FPIssueX(0)_occ:v=0:n=52
+Proc(0)_robUsed:v=67.3966:n=288413164
+Processor(0)_noFetch=63983814
+Processor(0)_noFetch2=181089965
+ExeEngine(0)_retired:v=0.545182:n=276689710
+ExeEngine(0):noRetOtherCause=0
+Processor(0):nLocks=0
+Processor(0):nLockContCycles=0
+ExeEngine(0):nSmallWin=88870011
+ExeEngine(0):nSmallROB=18344803
+ExeEngine(0):nSmallREG=157814713
+ExeEngine(0):nOutsLoads=3579732
+ExeEngine(0):nOutsStores=0
+ExeEngine(0):nOutsBranches=0
+ExeEngine(0):nReplays=0
+ExeEngine(0):PortConflict=0
+ExeEngine(0):switch=0
+ExeEngine(0):noRetSelf_iOpInvalid_NotExecuted=0
+ExeEngine(0):noRetSelf_iALU_NotExecuted=39051341
+ExeEngine(0):noRetSelf_iMult_NotExecuted=698086
+ExeEngine(0):noRetSelf_iDiv_NotExecuted=2340003
+ExeEngine(0):noRetSelf_iBJ_NotExecuted=31859326
+ExeEngine(0):noRetSelf_iLoad_NotExecuted=127657689
+ExeEngine(0):noRetSelf_iStore_NotExecuted=50339142
+ExeEngine(0):noRetSelf_fpALU_NotExecuted=215
+ExeEngine(0):noRetSelf_fpMult_NotExecuted=4
+ExeEngine(0):noRetSelf_fpDiv_NotExecuted=32
+ExeEngine(0):noRetSelf_iFence_NotExecuted=0
+ExeEngine(0):noRetSelf_iLoad_NotFinished=0
+ExeEngine(0):noRetSelf_iStore_NoCacheSpace=279
+ExeEngine(0):noRetSelf_iStore_NoCachePorts=5359743
+ExeEngine(0):noRetSelf_iStore_WaitForFence=0
+ExeEngine(0):noRetSelf_iFence_NoCacheSpace=0
+ExeEngine(0):noRetSelf_iFence_WaitForFence=0
+ExeEngine(0):noRetOther_iOpInvalid_NotExecuted=0
+ExeEngine(0):noRetOther_iALU_NotExecuted=147445998
+ExeEngine(0):noRetOther_iMult_NotExecuted=2582956
+ExeEngine(0):noRetOther_iDiv_NotExecuted=9100664
+ExeEngine(0):noRetOther_iBJ_NotExecuted=117392796
+ExeEngine(0):noRetOther_iLoad_NotExecuted=491343943
+ExeEngine(0):noRetOther_iStore_NotExecuted=190983218
+ExeEngine(0):noRetOther_fpALU_NotExecuted=806
+ExeEngine(0):noRetOther_fpMult_NotExecuted=13
+ExeEngine(0):noRetOther_fpDiv_NotExecuted=124
+ExeEngine(0):noRetOther_iFence_NotExecuted=0
+ExeEngine(0):noRetOther_iLoad_NotFinished=0
+ExeEngine(0):noRetOther_iStore_NoCacheSpace=1112
+ExeEngine(0):noRetOther_iStore_NoCachePorts=13845306
+ExeEngine(0):noRetOther_iStore_WaitForFence=0
+ExeEngine(0):noRetOther_iFence_NoCacheSpace=0
+ExeEngine(0):noRetOther_iFence_WaitForFence=0
+PendingWindow(0)_iOpInvalid:n=0
+PendingWindow(0)_iALU:n=55245621
+PendingWindow(0)_iComplex:n=267161
+PendingWindow(0)_iBJ:n=20389082
+PendingWindow(0)_iLoad:n=50481588
+PendingWindow(0)_iStore:n=24462655
+PendingWindow(0)_fpALU:n=47
+PendingWindow(0)_fpComplex:n=5
+PendingWindow(0)_other:n=0
+FetchEngine(0)_avgBranchTime:v=127.275:n=1485154
+FetchEngine(0)_avgInstsFetched:v=0:n=0
+FetchEngine(0):nDelayInst1=756090796
+FetchEngine(0):nDelayInst2=20607838
+FetchEngine(0):nFetched=150846159
+FetchEngine(0):nBTAC=0
+FetchEngine(0):szBB(1)=155
+FetchEngine(0):szBB(2)=303122
+FetchEngine(0):szBB(3)=3651355
+FetchEngine(0):szBB(4)=4110773
+FetchEngine(0):szBB(5)=2022510
+FetchEngine(0):szBB(6)=2110282
+FetchEngine(0):szBB(7)=3442533
+FetchEngine(0):szBB(8)=651593
+FetchEngine(0):szBB(9)=440332
+FetchEngine(0):szBB(10)=117343
+FetchEngine(0):szBB(11)=43016
+FetchEngine(0):szBB(12)=242440
+FetchEngine(0):szBB(13)=2239623
+FetchEngine(0):szBB(14)=79582
+FetchEngine(0):szBB(15)=49203
+FetchEngine(0):szBB(16)=1023
+FetchEngine(0):szBB(17)=88347
+FetchEngine(0):szBB(18)=853
+FetchEngine(0):szBB(19)=556
+FetchEngine(0):szBB(20)=66867
+FetchEngine(0):szBB(21)=65829
+FetchEngine(0):szBB(22)=5
+FetchEngine(0):szBB(23)=1
+FetchEngine(0):szBB(24)=8
+FetchEngine(0):szBB(25)=7
+FetchEngine(0):szBB(26)=11
+FetchEngine(0):szBB(27)=65537
+FetchEngine(0):szBB(29)=65537
+FetchEngine(0):szBB(33)=1
+FetchEngine(0):szBB(38)=3739
+FetchEngine(0):szBB(39)=1
+FetchEngine(0):szBB(43)=263529
+FetchEngine(0):szBB(45)=262946
+FetchEngine(0):szBB(72)=423
+FetchEngine(0):szBB_MaxKey=72
+FetchEngine(0):szBB_Avg=7.398379
+FetchEngine(0):szBB_Samples=20389082
+FetchEngine(0):szFB(1)=30
+FetchEngine(0):szFB(2)=98674
+FetchEngine(0):szFB(3)=1677836
+FetchEngine(0):szFB(4)=2911715
+FetchEngine(0):szFB(5)=492589
+FetchEngine(0):szFB(6)=1295552
+FetchEngine(0):szFB(7)=1531989
+FetchEngine(0):szFB(8)=760682
+FetchEngine(0):szFB(9)=389900
+FetchEngine(0):szFB(10)=1285830
+FetchEngine(0):szFB(11)=44770
+FetchEngine(0):szFB(12)=1015140
+FetchEngine(0):szFB(13)=2643227
+FetchEngine(0):szFB(14)=145170
+FetchEngine(0):szFB(15)=133096
+FetchEngine(0):szFB(16)=152848
+FetchEngine(0):szFB(17)=87136
+FetchEngine(0):szFB(18)=605
+FetchEngine(0):szFB(19)=67470
+FetchEngine(0):szFB(20)=66855
+FetchEngine(0):szFB(21)=65895
+FetchEngine(0):szFB(22)=16
+FetchEngine(0):szFB(23)=492
+FetchEngine(0):szFB(24)=41365
+FetchEngine(0):szFB(25)=69
+FetchEngine(0):szFB(26)=24182
+FetchEngine(0):szFB(27)=65826
+FetchEngine(0):szFB(28)=81
+FetchEngine(0):szFB(29)=75743
+FetchEngine(0):szFB(30)=1
+FetchEngine(0):szFB(31)=49182
+FetchEngine(0):szFB(32)=108
+FetchEngine(0):szFB(33)=11
+FetchEngine(0):szFB(34)=10
+FetchEngine(0):szFB(35)=69
+FetchEngine(0):szFB(36)=1
+FetchEngine(0):szFB(38)=2
+FetchEngine(0):szFB(39)=5
+FetchEngine(0):szFB(41)=1
+FetchEngine(0):szFB(42)=3732
+FetchEngine(0):szFB(43)=1
+FetchEngine(0):szFB(45)=262946
+FetchEngine(0):szFB(47)=263115
+FetchEngine(0):szFB(48)=423
+FetchEngine(0):szFB(51)=1
+FetchEngine(0):szFB(53)=8
+FetchEngine(0):szFB(72)=424
+FetchEngine(0):szFB(80)=1
+FetchEngine(0):szFB(115)=1
+FetchEngine(0):szFB_MaxKey=115
+FetchEngine(0):szFB_Avg=9.635761
+FetchEngine(0):szFB_Samples=15654825
+FetchEngine(0):szFS(1)=4001973
+FetchEngine(0):szFS(2)=3098619
+FetchEngine(0):szFS(3)=4308224
+FetchEngine(0):szFS(4)=31930569
+FetchEngine(0):szFS_MaxKey=4
+FetchEngine(0):szFS_Avg=3.480579
+FetchEngine(0):szFS_Samples=43339385
+BPred(0)_RAS:nHit=3633731
+BPred(0)_RAS:nMiss=345813
+BPred(0):nBranches=20389082
+BPred(0):nTaken=15654825
+BPred(0):nMiss=1485154
+BPred(0)_Hybrid:nHit=15270197
+BPred(0)_Hybrid:nMiss=1139341
+BPred(0)_BTB:nHit=11041105
+BPred(0)_BTB:nMiss=483
+P(1)_DL1:readHit=132091
+P(1)_DL1:writeHit=185915
+P(1)_DL1:readMiss=4820
+P(1)_DL1:writeMiss=379
+P(1)_DL1:readHalfMiss=3857
+P(1)_DL1:writeHalfMiss=645
+P(1)_DL1:writeBack=665
+P(1)_DL1:linePush=0
+P(1)_DL1:lineFill=5115
+P(1)_DL1:readRetry=0
+P(1)_DL1:writeRetry=0
+P(1)_DL1:invalDirty=0
+P(1)_DL1:allocDirty=663
+P(1)_DL1_occ:v=0.0218981:n=1611464
+P(1)_DL1_MSHR:nUse=323205
+P(1)_DL1_MSHR:nUseReads=323205
+P(1)_DL1_MSHR:nUseWrites=0
+P(1)_DL1_MSHR:nOverflows=0
+P(1)_DL1_MSHR_maxUsedEntries:max=4:n=318703
+P(1)_DL1_MSHR:nCanAccept=186294
+P(1)_DL1_MSHR:nCanNotAccept=0
+P(1)_DL1_MSHR:nCanNotAcceptConv=0
+P(1)_DL1_MSHR:blockingCycles(0)=288413166
+P(1)_DL1_MSHR:blockingCycles_AutoAvg=0.000000
+P(1)_DL1_MSHR_avgOverflowConsumptions:v=0:n=0
+P(1)_DL1_MSHR_maxOutsReqs:max=13:n=323205
+P(1)_DL1_MSHR_avgReqsPerLine:v=1.01413:n=318703
+P(1)_DL1_MSHR:nIssuesNewEntry=318703
+P(1)_DL1_MSHR:nCanNotAcceptSubEntryFull=0
+P(1)_DL1_MSHR:nCanNotAcceptTooManyWrites=0
+P(1)_DL1_MSHR_avgQueueSize:v=0.239028:n=323205
+P(1)_DL1_MSHR_avgWritesPerLine:v=0:n=318703
+P(1)_DL1_MSHR_avgWritesPerLineComb:v=0:n=318703
+P(1)_DL1_MSHR:nOnlyWrites=0
+P(1)_DL1_MSHR:nRetiredEntries=318703
+P(1)_DL1_MSHR:nRetiredEntriesWritten=0
+P(1)_IL1:readHalfMiss=221
+P(1)_IL1:writeHalfMiss=0
+P(1)_IL1:writeMiss=0
+P(1)_IL1:readMiss=415
+P(1)_IL1:readHit=310980
+P(1)_IL1:writeHit=0
+P(1)_IL1:writeBack=0
+P(1)_IL1:lineFill=415
+P(1)_IL1:linePush=0
+P(1)_IL1:nForwarded=0
+P(1)_IL1:nWBFull=0
+P(1)_IL1_avgPendingWrites:v=0:n=0
+P(1)_IL1_avgMissLat:v=318.497:n=636
+P(1)_IL1:rejected=0
+P(1)_IL1:rejectedHits=0
+P(1)_IL1_MSHR0_MSHR:nUse=636
+P(1)_IL1_MSHR0_MSHR:nUseReads=636
+P(1)_IL1_MSHR0_MSHR:nUseWrites=0
+P(1)_IL1_MSHR0_MSHR:nOverflows=0
+P(1)_IL1_MSHR0_MSHR_maxUsedEntries:max=3:n=415
+P(1)_IL1_MSHR0_MSHR:nCanAccept=0
+P(1)_IL1_MSHR0_MSHR:nCanNotAccept=0
+P(1)_IL1_MSHR0_MSHR:nCanNotAcceptConv=0
+P(1)_IL1_MSHR0_MSHR:blockingCycles_AutoAvg=0.000000
+P(1)_IL1_MSHR0_MSHR_avgOverflowConsumptions:v=0:n=0
+P(1)_IL1_MSHR0_MSHR_maxOutsReqs:max=4:n=636
+P(1)_IL1_MSHR0_MSHR_avgReqsPerLine:v=1.53253:n=415
+P(1)_IL1_MSHR0_MSHR:nIssuesNewEntry=415
+P(1)_IL1_MSHR0_MSHR:nCanNotAcceptSubEntryFull=0
+P(1)_IL1_MSHR0_MSHR:nCanNotAcceptTooManyWrites=0
+P(1)_IL1_MSHR0_MSHR_avgQueueSize:v=5.92453:n=636
+P(1)_IL1_MSHR0_MSHR_avgWritesPerLine:v=0:n=415
+P(1)_IL1_MSHR0_MSHR_avgWritesPerLineComb:v=0:n=415
+P(1)_IL1_MSHR0_MSHR:nOnlyWrites=0
+P(1)_IL1_MSHR0_MSHR:nRetiredEntries=415
+P(1)_IL1_MSHR0_MSHR:nRetiredEntriesWritten=0
+P(1)_IL1_B0:nAccesses=311616
+P(1)_IL1_occ:v=0:n=311616
+P(1)_IL1_B0_occ:v=0:n=312031
+P(1)_IL1_MSHR_B0_occ:v=0:n=1051
+LDSTQ(1)_ldldViolations=5097
+LDSTQ(1)_stldViolations=3437
+LDSTQ(1)_ststViolations=3339
+LDSTQ(1)_stldForwarding=69130
+Proc(1)_FXClusterIssueX:nReplay=52931
+Proc(1)_FXClusterIssueX_wakeUp_occ:v=0.0437133:n=2165380
+Proc(1)_FXClusterIssueX_sched_occ:v=0.00346452:n=1082690
+Proc(1)_FXClusterIssueX_winNotUsed:v=46.6075:n=1082690
+ALUIssueX(1)_occ:v=0.0329231:n=515717
+LDSTIssueX(1)_occ:v=0.0748977:n=753267
+FULoad(1)_ldqNotUsed:v=29.4504:n=380679
+FULoad(1):nForwarded=243768
+FUStore(1)_stqNotUsed:v=40.8871:n=186294
+FUStore(1):nDeadStore=0
+FUStore(1):nFences=0
+FUStore(1):fenceStallCycles=0
+Proc(1)_FPClusterIssueX:nReplay=0
+Proc(1)_FPClusterIssueX_wakeUp_occ:v=0:n=0
+Proc(1)_FPClusterIssueX_sched_occ:v=0:n=0
+Proc(1)_FPClusterIssueX_winNotUsed:v=0:n=0
+FPIssueX(1)_occ:v=0:n=0
+Proc(1)_robUsed:v=64.9231:n=3130429
+Processor(1)_noFetch=527075
+Processor(1)_noFetch2=2291738
+ExeEngine(1)_retired:v=0.363856:n=2975598
+ExeEngine(1):noRetOtherCause=0
+Processor(1):nLocks=0
+Processor(1):nLockContCycles=0
+ExeEngine(1):nSmallWin=585580
+ExeEngine(1):nSmallROB=475
+ExeEngine(1):nSmallREG=800886
+ExeEngine(1):nOutsLoads=814527
+ExeEngine(1):nOutsStores=0
+ExeEngine(1):nOutsBranches=0
+ExeEngine(1):nReplays=0
+ExeEngine(1):PortConflict=0
+ExeEngine(1):switch=0
+ExeEngine(1):noRetSelf_iOpInvalid_NotExecuted=0
+ExeEngine(1):noRetSelf_iALU_NotExecuted=251321
+ExeEngine(1):noRetSelf_iMult_NotExecuted=4992
+ExeEngine(1):noRetSelf_iDiv_NotExecuted=9786
+ExeEngine(1):noRetSelf_iBJ_NotExecuted=221485
+ExeEngine(1):noRetSelf_iLoad_NotExecuted=1907329
+ExeEngine(1):noRetSelf_iStore_NotExecuted=402158
+ExeEngine(1):noRetSelf_fpALU_NotExecuted=0
+ExeEngine(1):noRetSelf_fpMult_NotExecuted=0
+ExeEngine(1):noRetSelf_fpDiv_NotExecuted=0
+ExeEngine(1):noRetSelf_iFence_NotExecuted=0
+ExeEngine(1):noRetSelf_iLoad_NotFinished=0
+ExeEngine(1):noRetSelf_iStore_NoCacheSpace=0
+ExeEngine(1):noRetSelf_iStore_NoCachePorts=41114
+ExeEngine(1):noRetSelf_iStore_WaitForFence=0
+ExeEngine(1):noRetSelf_iFence_NoCacheSpace=0
+ExeEngine(1):noRetSelf_iFence_WaitForFence=0
+ExeEngine(1):noRetOther_iOpInvalid_NotExecuted=0
+ExeEngine(1):noRetOther_iALU_NotExecuted=953988
+ExeEngine(1):noRetOther_iMult_NotExecuted=18477
+ExeEngine(1):noRetOther_iDiv_NotExecuted=38076
+ExeEngine(1):noRetOther_iBJ_NotExecuted=818553
+ExeEngine(1):noRetOther_iLoad_NotExecuted=7489688
+ExeEngine(1):noRetOther_iStore_NotExecuted=1525812
+ExeEngine(1):noRetOther_fpALU_NotExecuted=0
+ExeEngine(1):noRetOther_fpMult_NotExecuted=0
+ExeEngine(1):noRetOther_fpDiv_NotExecuted=0
+ExeEngine(1):noRetOther_iFence_NotExecuted=0
+ExeEngine(1):noRetOther_iLoad_NotFinished=0
+ExeEngine(1):noRetOther_iStore_NoCacheSpace=0
+ExeEngine(1):noRetOther_iStore_NoCachePorts=97165
+ExeEngine(1):noRetOther_iStore_WaitForFence=0
+ExeEngine(1):noRetOther_iFence_NoCacheSpace=0
+ExeEngine(1):noRetOther_iFence_WaitForFence=0
+PendingWindow(1)_iOpInvalid:n=0
+PendingWindow(1)_iALU:n=363178
+PendingWindow(1)_iComplex:n=1193
+PendingWindow(1)_iBJ:n=151346
+PendingWindow(1)_iLoad:n=380679
+PendingWindow(1)_iStore:n=186294
+PendingWindow(1)_fpALU:n=0
+PendingWindow(1)_fpComplex:n=0
+PendingWindow(1)_other:n=0
+FetchEngine(1)_avgBranchTime:v=214.376:n=11705
+FetchEngine(1)_avgInstsFetched:v=0:n=0
+FetchEngine(1):nDelayInst1=10037084
+FetchEngine(1):nDelayInst2=151979
+FetchEngine(1):nFetched=1082690
+FetchEngine(1):nBTAC=0
+FetchEngine(1):szBB(1)=1
+FetchEngine(1):szBB(2)=1593
+FetchEngine(1):szBB(3)=34937
+FetchEngine(1):szBB(4)=34773
+FetchEngine(1):szBB(5)=9481
+FetchEngine(1):szBB(6)=2952
+FetchEngine(1):szBB(7)=30679
+FetchEngine(1):szBB(8)=742
+FetchEngine(1):szBB(9)=2270
+FetchEngine(1):szBB(10)=2420
+FetchEngine(1):szBB(11)=1060
+FetchEngine(1):szBB(12)=2413
+FetchEngine(1):szBB(13)=20147
+FetchEngine(1):szBB(14)=981
+FetchEngine(1):szBB(15)=2
+FetchEngine(1):szBB(16)=938
+FetchEngine(1):szBB(17)=679
+FetchEngine(1):szBB(18)=790
+FetchEngine(1):szBB(19)=518
+FetchEngine(1):szBB(20)=1262
+FetchEngine(1):szBB(21)=265
+FetchEngine(1):szBB(22)=1
+FetchEngine(1):szBB(26)=1
+FetchEngine(1):szBB(43)=1246
+FetchEngine(1):szBB(45)=1193
+FetchEngine(1):szBB(72)=2
+FetchEngine(1):szBB_MaxKey=72
+FetchEngine(1):szBB_Avg=7.153740
+FetchEngine(1):szBB_Samples=151346
+FetchEngine(1):szFB(1)=1
+FetchEngine(1):szFB(2)=898
+FetchEngine(1):szFB(3)=8867
+FetchEngine(1):szFB(4)=27733
+FetchEngine(1):szFB(5)=1107
+FetchEngine(1):szFB(6)=2847
+FetchEngine(1):szFB(7)=12042
+FetchEngine(1):szFB(8)=10315
+FetchEngine(1):szFB(9)=1089
+FetchEngine(1):szFB(10)=17808
+FetchEngine(1):szFB(11)=2712
+FetchEngine(1):szFB(12)=1100
+FetchEngine(1):szFB(13)=20599
+FetchEngine(1):szFB(14)=1046
+FetchEngine(1):szFB(15)=211
+FetchEngine(1):szFB(16)=683
+FetchEngine(1):szFB(17)=686
+FetchEngine(1):szFB(18)=519
+FetchEngine(1):szFB(19)=1830
+FetchEngine(1):szFB(20)=1230
+FetchEngine(1):szFB(21)=326
+FetchEngine(1):szFB(22)=2
+FetchEngine(1):szFB(23)=452
+FetchEngine(1):szFB(25)=27
+FetchEngine(1):szFB(26)=1
+FetchEngine(1):szFB(27)=270
+FetchEngine(1):szFB(28)=78
+FetchEngine(1):szFB(29)=37
+FetchEngine(1):szFB(32)=86
+FetchEngine(1):szFB(35)=65
+FetchEngine(1):szFB(36)=1
+FetchEngine(1):szFB(39)=1
+FetchEngine(1):szFB(44)=1
+FetchEngine(1):szFB(45)=1194
+FetchEngine(1):szFB(47)=1244
+FetchEngine(1):szFB(48)=2
+FetchEngine(1):szFB(72)=2
+FetchEngine(1):szFB_MaxKey=72
+FetchEngine(1):szFB_Avg=9.244911
+FetchEngine(1):szFB_Samples=117112
+FetchEngine(1):szFS(1)=28638
+FetchEngine(1):szFS(2)=23224
+FetchEngine(1):szFS(3)=31412
+FetchEngine(1):szFS(4)=228342
+FetchEngine(1):szFS_MaxKey=4
+FetchEngine(1):szFS_Avg=3.474436
+FetchEngine(1):szFS_Samples=311616
+BPred(1)_RAS:nHit=26612
+BPred(1)_RAS:nMiss=1548
+BPred(1):nBranches=151346
+BPred(1):nTaken=117112
+BPred(1):nMiss=11705
+BPred(1)_Hybrid:nHit=113029
+BPred(1)_Hybrid:nMiss=10157
+BPred(1)_BTB:nHit=84195
+BPred(1)_BTB:nMiss=121
+END GStats::report Final
+OSSim:endTime=Wed Oct  8 15:47:37 2014
+

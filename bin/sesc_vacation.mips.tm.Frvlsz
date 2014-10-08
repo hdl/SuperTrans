@@ -1,0 +1,220 @@
+#BEGIN Configuration used. Extracted from "sesc.conf":
+procsPerNode=4
+cpucore[0:3]='issueX'
+NoMigration=true
+pageSize  =4096
+technology='techParam'
+[issueX]
+instrSource="IMemory IL1"
+robSize   =176
+stForwardDelay=2
+renameDelay=3
+dataSource="DMemory DL1"
+issueWidth=4
+maxStores =56
+maxBranches=64
+retireWidth=5
+inorder   =false
+OSType    ='dummy'
+dtlb      ='FXDTLB'
+cluster[1:1]='FPClusterIssueX'
+cluster   ='FXClusterIssueX'
+interClusterLat=2
+maxLoads  =56
+intRegs   =96
+regFileDelay=3
+fetchWidth=4
+bpred     ='BPredIssueX'
+maxIRequests=4
+decodeDelay=6
+bb4Cycle  =1
+enableICache=true
+instQueueSize=8
+itlb      ='FXITLB'
+fpRegs    =80
+[FXDTLB]
+size      =512
+replPolicy='LRU'
+bsize     =8
+assoc     =4
+deviceType='cache'
+[DMemory]
+MSHR      ='DMSHR'
+missDelay =2
+bsize     =32
+hitDelay  =2
+numPorts  =2
+deviceType='smpcache'
+assoc     =4
+lowerLevel="L1L2DBus L1L2D shared"
+size      =32768
+protocol  ='MESI'
+replPolicy='LRU'
+portOccp  =2
+[Memory]
+size      =64
+numPorts  =1
+portOccp  =1
+bsize     =64
+assoc     =1
+missDelay =469
+replPolicy='LRU'
+MSHR      ='NoMSHR'
+deviceType='niceCache'
+hitDelay  =469
+lowerLevel='voidDevice'
+[IMemory]
+assoc     =2
+missDelay =1
+replPolicy='LRU'
+MSHR      ='iMSHR'
+bsize     =32
+size      =32768
+writePolicy='WT'
+lowerLevel="L1L2Bus L1L2 shared"
+hitDelay  =1
+deviceType='icache'
+numPorts  =2
+portOccp  =1
+[L1L2Bus]
+deviceType='bus'
+numPorts  =1
+delay     =1
+portOccp  =1
+lowerLevel="L2Cache L2"
+[L1L2DBus]
+portOccp  =1
+lowerLevel="L2Cache L2"
+numPorts  =1
+delay     =1
+deviceType='systembus'
+[L2Cache]
+numPorts  =2
+replPolicy='LRU'
+missDelay =11
+size      =1048576
+portOccp  =2
+hitDelay  =9
+assoc     =8
+lowerLevel="SystemBus SysBus "
+inclusive =false
+MSHR      ='L2MSHR'
+deviceType='cache'
+bsize     =32
+writePolicy='WB'
+[FPClusterIssueX]
+wakeUpPortOccp=1
+wakeUpNumPorts=4
+fpMultUnit='FPIssueX'
+schedDelay=1
+schedPortOccp=1
+fpDivUnit ='FPIssueX'
+winSize   =32
+schedNumPorts=4
+wakeupDelay=3
+fpALULat  =1
+fpALUUnit ='FPIssueX'
+fpDivLat  =10
+fpMultLat =2
+recycleAt ='Execute'
+[BPredIssueX]
+type      ='hybrid'
+l2size    =16384
+Metasize  =16384
+btbBsize  =1
+historySize=11
+MetaBits  =2
+btbReplPolicy='LRU'
+l2Bits    =1
+btbSize   =2048
+localSize =16384
+rasSize   =32
+BTACDelay =0
+localBits =2
+btbAssoc  =2
+[FXClusterIssueX]
+schedDelay=1
+iALUUnit  ='ALUIssueX'
+iStoreUnit='LDSTIssueX'
+wakeupDelay=3
+recycleAt ='Execute'
+iBJUnit   ='ALUIssueX'
+iDivUnit  ='ALUIssueX'
+iMultUnit ='ALUIssueX'
+iMultLat  =4
+iDivLat   =12
+winSize   =80
+wakeUpNumPorts=4
+iLoadLat  =1
+iLoadUnit ='LDSTIssueX'
+iStoreLat =1
+schedNumPorts=4
+wakeUpPortOccp=1
+iBJLat    =1
+schedPortOccp=1
+iALULat   =1
+[TransactionalMemory]
+transReportFlush=10
+traceToFile=1
+recordTransMemRefs=0
+printTransactionalReportSummary=1
+calculateFullReadWriteSet=0
+traceFile ='Eager_core4'
+conflictDetect=1
+printRealBCTimes=0
+enableBeginTMStats=0
+printTransactionalReport=0
+cacheLineSize=32
+versioning=1
+limitAborts=0
+printSummaryReport=1
+printAllNacks=0
+printDetailedTrace=0
+[MemoryBus]
+delay     =15
+lowerLevel="Memory Memory"
+deviceType='bus'
+numPorts  =1
+portOccp  =8
+[NoMSHR]
+bsize     =64
+type      ='none'
+size      =128
+[L2MSHR]
+size      =64
+bsize     =32
+type      ='single'
+[ALUIssueX]
+Occ       =1
+Num       =2
+[FXITLB]
+size      =512
+deviceType='cache'
+replPolicy='LRU'
+bsize     =8
+assoc     =4
+[techParam]
+frequency =5.000000e+09
+[DMSHR]
+bsize     =32
+type      ='single'
+size      =64
+[FPIssueX]
+Num       =3
+Occ       =1
+[SystemBus]
+lowerLevel="MemoryBus MemoryBus"
+portOccp  =1
+delay     =1
+numPorts  =1
+deviceType='bus'
+[LDSTIssueX]
+Num       =2
+Occ       =1
+[voidDevice]
+deviceType='void'
+[iMSHR]
+type      ='single'
+bsize     =32
+size      =32
+#END Configuration used. Extracted from "sesc.conf":
