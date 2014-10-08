@@ -6,7 +6,7 @@ printDetailedTrace              = 0   # Print Full Detailed Transactional Trace
 printTransactionalReport        = 0   # Print Transactional Report (1 line per TX)
 printTransactionalReportSummary = 1   # Print Transactional Summary Report
 printSummaryReport              = 1   # Print Global TM Summary Report
-traceToFile                     = 0   # Output debug info to a file instead of stdout
+traceToFile                     = 1   # Output debug info to a file instead of stdout
 traceFile                       = "Eager_core8"  # Optional tag to add to the output file
 
 ### Coherence Protocol Options
