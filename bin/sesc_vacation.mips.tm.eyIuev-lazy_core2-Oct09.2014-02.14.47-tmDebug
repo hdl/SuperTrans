@@ -1,0 +1,23 @@
+<Trans> tmTrace: IRCD :99999999999:0:6666:149719504:285095800
+<Trans> tmReport:ENDINST:0:150845748
+<Trans> tmReport:ENDINST:1:1082280
+<Trans> tmReport:INSTCOUNT:151929857:
+
+
+<Trans> tmReportSummary:CPU:TX_COUNT:COMMITS:ABORTS:CM_INST:CM_CYCLES:CM_NKCYCLES:AVG_CM_INST:AVG_CM_CYC:AVG_CM_READS:AVG_CM_READSET:AVG_CM_WRITES:AVG_CM_WRITESET:AVG_CM_NACKCYC:AB_INST:AB_CYCLES:AB_NKCYCLES:AVG_AB_INST:AVG_AB_CYC:AVG_AB_READS:AVG_AB_READSET:AVG_AB_WRITES:AVG_AB_WRITESET:AVG_AB_NACKCYC
+<Trans> tmReportSummary:0:205:205:0:936078:3016940:658:4566.2341:14716.7805:1652.2439:75.9024:814.1220:18.3366:3.2098:0:0:0:-nan:-nan:-nan:-nan:-nan:-nan:-nan
+<Trans> tmReportSummary:1:205:205:0:898802:2894134:538:4384.4000:14117.7268:1585.6195:72.9756:780.6049:16.0390:2.6244:0:0:0:-nan:-nan:-nan:-nan:-nan:-nan:-nan
+
+
+#tableG,ALL,ALL,StatsInc,Commit,Abort,NTot,NAvg,NCyc,NCycAvg,ComCycTot,ComCycAvg,ComCycMin,ComCycMax,InstTotCm,InstAvgCm,InstMinCm,InstMaxCm,AbortCycTot,AbortCycAvg,AbortCycMin,AbortCycMax,InstTotAb,InstAvgAb,InstMinAb,InstMaxAb,R-Set,Loads,W-Set,Stores,BeginInstCount,BeginCycleCount,ANTot,ANAvg,ANCyc,ANCycAvg
+tableG,ALL,ALL,410,410,0,10,0.02,1196,119.60,5911074,14417.25,3934,53878,1834880,4475.32,574,6874,0,-nan,999999999,0,0,-nan,999999999,0,74.44,1618.93,17.19,797.36,0,0,0,-nan,0,-nan
+
+Global Totals:
+          Trans ->   StatsInc:     410    Commit:       410    Abort:        0
+          Nacks ->   Total:         10    Avg:         0.02    Cyc:       1196    Avg:      119.60
+          CyclCM->   Total:    5911074    Avg:     14417.25    Min:       3934    Max:       53878
+          InstCM->   Total:    1834880    Avg:      4475.32    Min:        574    Max:        6874
+          CyclAB->   Total:          0    Avg:         -nan    Min:   999999999    Max:           0
+          InstAB->   Total:          0    Avg:         -nan    Min:   999999999    Max:           0
+          Memory->   R-Set:      74.44    Loads:    1618.93    W-Set:    17.19    Stores:   797.36
+

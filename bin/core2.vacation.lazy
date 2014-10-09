@@ -1,0 +1,17 @@
+static[0x467570-0x1000191c] heap[0x10002000-0x18002000] stack[0x18002000-0x187fa000] -> [0x9e000000-0xb6392a90]
+ExecutionFlow[0] switchIn pid(0) 0x400130 @0
+Initializing manager... done.
+Initializing clients... done.
+    Transactions        = 409
+    Clients             = 2
+    Transactions/client = 205
+    Queries/transaction = 2
+    Relations           = 16384
+    Query percent       = 90
+    Query range         = 14746
+    Percent user        = 98
+Running clients... ExecutionFlow[1] switchIn pid(1) 0x4013b8 @285095830
+CodeFlag: 0 -> 9
+done.
+Time = 0.000659
+Deallocating memory... done.
